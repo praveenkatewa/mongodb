@@ -1,0 +1,577 @@
+use prem
+show dbs  //show database
+use dbs    //name of database
+show dbs
+show collections    // it show collection of database
+
+db.createCollection("puja")    // to create collection
+
+
+db.puja.find()    // to find inside  db.collectionname.find()
+
+db.puja.insertOne({name:"kiran",email:"kiran@gmail.com"})
+db.collectionname.insertOne({})      // for many   insertMany
+ 
+db.puja.drop()         // collections also remove by this
+
+
+==============================================================================
+
+
+Chapter 2: aggregation pipeline
+group karenge documents ka fir unme kuch find karne wale hai
+pipeline ek ke baad dusra
+mongodb is having objectid with itself which makes all the document unique.it has no such problem of prinary key. secondary key, candidate key.
+
+> mongodb is scalable
+
+It stores data either of the two methods One is vertical scalable nethod and other one is horizontal scalable method.
+System design nein ek part hoti hai scaling
+
+sharding : horizontal vertical 
+horizontal we divide the physical memory into multiple sub memories
+vertical we try to increase the physical memory
+
+aggregation pipleline ke mostly used operators hai :
+$match == find
+condition ko match karwane ke Liye use hogi
+
+$group : jab hume documents ki grouping karni hogi
+
+$projection =jab hunne limited keys dikhani ho
+
+$unwind : jab hume array ko todna ho
+
+====================================================================================
+15.6.2024
+
+> system design:
+1. monolithic architecture
+2. distributive architecture
+software webapp website
+
+database : monolithic or distributive
+
+monolithic = find, vertical scaling
+distributive = aggregation pipleline, horizontal scaling
+
+
+
+
+
+============================================================================================== 15.6,2024
+ qes: Find all female users from Jaipur who know Python.
+[{
+  $match: {
+    gender:"Female",
+    city:"Jaipur",
+    skills:"Python"
+  }
+}
+
+]
+=
+qes2:Find all male users in Delhi who are above age 26
+[{
+  $match: {
+  
+    city:" New Delhi",
+    gender:"Male",
+    age:{$gt:26}
+  }
+}
+
+]
+
+==qes3:Find all users who are from either New Delhi or Mumbai.
+$in:more than one true.
+[{
+  $match: {
+  
+    city:{$in:["New Delhi","Mumbai"] 
+    
+  }
+}
+
+]
+=====
+qes4:Find the count of users in each city.
+[{
+  $match: {
+  
+    city:"New Delhi" 
+    
+  }
+},
+ {
+$count: 'TotalUsersFromNewDelhi'
+ }
+
+]
+===
+qes5:How many Female users are from Jaipur?
+[{
+  $match: {
+  
+    city:"Jaipur" ,
+    gender:"Female"
+    
+  }
+},
+ {
+   $count: 'TotalFemailusersfromjaipur'
+ }
+
+]
+
+qes6:How many Male users are there in Delhi who have skills Java?
+[{
+  $match: {
+  
+    city:"New Delhi" ,
+    gender:"Male",
+    skills:"Python" 
+  }
+},
+ {
+ $count:"userfromdelhihavingskillspython"
+ }
+]
+
+qes7:How many users are from Hyderabad having age greater than 24 and have skill Python,C++
+
+[{
+  $match: {
+  
+    city:"Hyderabad" ,
+    age:{$gt:24},
+    skills:{$all:["C++","Java" ]}
+  }
+},
+ {
+ $count:"userfromhydskillsc++java"
+ }
+]
+
+
+qess8:How many female users are from Goa having age greater than 24 and have skill Python,C++
+[{
+  $match: {
+  
+    city:"Goa" ,
+    age:{$gt:24},
+    gender:"Fenale",
+    skills:{$all:["C++","Python" ]}
+  }
+},
+ {
+ $count:"userfromgoaskillsc++python"
+ }
+]
+=====================================================================
+// groups
+can be done on the basis of any key
+documents ko on the basis of skills, gender, city
+
+[{
+    $group:{
+      _id:"$gender"
+    } 
+  }
+]
+=====
+[{
+    $group:{
+      _id:"$city"
+    } 
+  },
+ {
+$count:'city count'}
+]
+
+
+ qes: Find the count of users in each city.
+[{
+    $group:{
+      _id:"$city",
+      countuser:{ $sum:1 }
+    } 
+  }
+]
+
+
+=====
+[{
+    $group:{
+      _id:"$gender",
+      countuser:{ $sum:1 }
+    } 
+  }
+]
+====
+
+[{
+    $group:{
+      _id:"$age",
+      countuser:{ $sum:1 }
+    } 
+  }
+]
+
+====
+[{
+    $group:{
+      _id:"$skills",
+      countuser:{ $sum:1 }
+    } 
+  }
+]
+
+===
+[{
+    $group:{
+      _id:"$lastName",
+      countuser:{ $sum:1 }
+    } 
+  }
+]
+
+===
+[{
+    $group:{
+      _id:"$lastName",
+      countuser:{ $sum:1 },
+      users:{$push:"$$ROOT"}
+    } 
+  }
+]
+===
+[{
+    $group:{
+      _id:"$city",
+      countuser:{ $sum:1 },
+      users:{$push:"$$ROOT"}
+    } 
+  }
+]
+==============================
+15.6.2024
+1. Group users by role and calculate the average salary for each role.
+[
+  {
+    $group:{
+_id:"$role",
+      averageSal:{$avg:"$salary"}
+    }
+}
+]
+ans:
+_id
+"admin"
+averageSal
+1028571.4285714285
+
+_id
+"customer"
+averageSal
+875000
+========
+2. Group users by city and find the total number of users in each city.
+[
+  {
+    $group:{
+_id:"$city",
+      user:{$sum:1}
+    
+    }
+}
+]
+ans:
+
+user
+2
+_id
+"Mumbai"
+
+_id
+"Goa"
+user
+4
+_id
+"New Delhi"
+user
+3
+_id
+"Jaipur"
+user
+3
+_id
+"Assam"
+user
+3
+_id
+"Kolkata"
+user
+4
+_id
+"Hyderabad"
+user
+2
+=======
+3. Group users by gender and determine the average age for each gender.
+[
+  {
+    $group:{
+_id:"$gender",
+      average:{$avg:"$age"}
+    
+    }
+}
+]
+ans:
+_id
+"Male"
+average
+28
+
+_id
+"Female"
+average
+28.4
+
+[
+  {
+    $group:{
+_id:"$gender",
+      average:{$avg:"$salary"}
+    
+    }
+}
+]
+
+ans:
+
+_id
+"Male"
+average
+936363.6363636364
+
+_id
+"Female"
+average
+915000
+
+
+4. Group users by role and city, and calculate the total salary for each subgroup.
+[
+  {
+    $group:{
+_id:{role:"$role",city:"$city"},
+      averageAge:{$sum:"$salary"}
+    
+    }
+}
+]
+
+5. Group users by gender and city, and find the maximum salary in each subgroup.
+[
+  {
+    $group:{
+_id:{role:"$gender",city:"$city"},
+      averageAge:{$sum:"$salary"}
+    
+    }
+}
+]
+composite key: is the combination of more than one object keys
+
+5. Group users by gender and city, and find the maximum salary in each subgroup.
+
+[
+  {
+    $group:{
+_id:{role:"$gender",city:"$city"},
+      maxsal:{$max:"$salary"}
+    
+    }
+}
+]
+
+
+6. Group users by skills and count how many users have each skill.
+$unwind : ka use karenge array ko todne ke liye
+[
+  {
+$unwind:"$skills",
+  },
+  {
+$group:{
+  _id:"$skills",
+  skillscount:{$sum:1},
+  users:{$push:"$$ROOT"}
+}}
+]
+
+
+[
+  {
+$unwind:"$skills",
+  },
+  {
+$group:{
+  _id:"$skills",
+  averagesal:{$avg:"$salary"},
+  users:{$push:"$$ROOT"}
+}}
+]
+7. Group users by role and find the minimum age for each role.
+
+
+[
+  
+  {
+$group:{
+  _id:"$role",
+ minAge:{$min:"$age"}
+}}
+]
+
+[
+  
+  {
+$group:{
+  _id:"$role",
+ minAge:{$avg:"$salary"},
+  users:{$push:"$$ROOT"}
+}}
+]
+
+9. Group users by role and determine the total number of unique cities for each role.
+
+[
+  
+  {
+$group:{
+  _id:"$role",
+  uniquecity:{$addToSet:"$city"}
+ 
+}}
+]
+
+
+_id
+"admin"
+
+uniquecity
+Array (5)
+
+_id
+"customer"
+
+uniquecity
+Array (7)
+
+[
+  
+  {
+        $group:{
+          _id:"$role",
+          uniqueCity:{$addToSet:"$city"}
+      }
+  },
+  {
+      $project:{
+        role:"$_id",
+        city:"$uniqueCity",
+        totaluniquecity:{$size:"$uniqueCity"}
+      }
+  }
+
+]
+
+
+
+
+
+
+
+
+
+
+
+12:
+db.users.find({firstname:/^R/})
+
+===============================================
+
+opeartors
+
+$and $or $not $ne $exist $all $nin
+
+==============================================
+14:
+db.users.find({skills:{$all:["java","python"]}})
+
+====================================================
+ db.users.find({$or:[{FirstName:"Aryan"},{lastName:"Gupta"}]})
+===========================================================================
+16> db.users.find({$or:[{city:"Kolkata"},{city:"Kolkata"}]})
+=================================================================================
+17> db.users.find({skills:"Java", skills:{$ne:"Python"}})
+
+===================================================================
+db.users.find({skills:"React", skills:{$ne:"Java"}})
+
+======================================================================================
+ db.users.find({$and:[{skills:"React"},{ skills:{$ne:"Java"}}]})
+=======================================================================================
+   db.users.find({skills:{$size:3, }})
+=======================================================================================
+db.collection.find({ "role": "admin","firstName": { $regex: /^R/ }})
+ db.users.find({firstName:/^S/,role:"admin"})
+===========================================================================================q20)
+db.users.find({firstName:/^$/,role:"admin"})
+-=======================================================================
+q 21) db.users.find({role:{$exists:false}})
+
+= exist field hume tab use mai leni hai jab yeh clear na ho ki sarein mai same field of information hai.
+= kyuki mongodb schema flexible hota hai to usme yeh jaruri nahi hai 2 object mai same field of information ho.
+- matlab agar ek object mai sirf name,email,phone number hai to mongodb use bhi valid object consider karti hai and agar no field of information 
+
+
+
+qes 22)
+atlest ==kam se kam (greater than equals)
+atmost== Zada se Zada (less than equals)
+
+$gt $gte $lt $lte $ne $eq 
+=============================================================
+qes 23)
+db.users.find({role:"customer",skills:{$exists:true}})
+===================================================================================
+Find all documents where the user's email contains "regexsoftware.com".
+db.users.find({useremail:/regexsoftware.com/})
+db.users.find({useremail:/.com$/})
+
+
+=============================================
+last name end with a
+db.users.find({username:/a$/})
+
+==============================================================================
+not gmail.com 
+db.users.find({useremail:{$not:/gmail.com$/}})
+===================================================================
+ 27.Find all documents where the user's last name is not "Singh".
+db.users.find({useremail:{$not:/singh$/}})
+===============================================================================
+find all male users in  delhi who are above age 26
+ db.users.find({city:"New Delhi",age:{$gte:26}})
+================================================================================
+How many Male users are there in Delhi who have skills Java?
+db.users.find({city:"Jaipur",gender:"male",skills:"Java"}).count()
+=================================================================================
+How many users are from Hyderabad having age greater than 24 and have skill Python,C++
+db.users.find({city:"Jaipur",age:{$gt:24},skills
+
+
