@@ -1,0 +1,250 @@
+ 
+1) How would you destructure nested objects?
+
+const { address: { city, zip } } = obj;
+ 
+
+ 
+2) Which of the following scenarios correctly uses the spread operator to pass an array as function arguments?
+
+
+myFunction(...array);
+ 
+
+ 
+3) How would you filter a pets collection to find documents where the age is not between 1 and 5?
+
+{ age: { $not: { $gte: 1, $lte: 5 } } }
+ 
+
+ 
+4) How would you provide default values while destructuring an object?
+
+const { name = "Unknown", age = 0 } = obj;
+ 
+5) How would you use the $unwind stage to break down an array field called subjects into multiple documents?
+
+{ $unwind: "$subjects" }
+ 
+
+ 
+6) Given a students collection with fields name, age, and grade, which aggregation stage would you use to calculate the average age of students in each grade?
+
+
+$group
+ 
+
+ 
+7 ) How do you filter a vehicles collection to find documents where the year is greater than or equal to 2015?
+
+{ year: { $gte: 2015 } }
+ 
+
+ 
+8) Which operator would you use to find students in a students collection who have grades in the range of 70 to 90?
+
+{ grade: { $gte: 70, $lte: 90 } }
+ 
+
+ 
+9) In a pets collection, how would you use the $group stage to count the number of pets by their type?
+
+[ { $group: { _id: "$type", count: { $sum: 1 } } } ]
+ 
+
+ 
+10) Question: In a students collection, which of the following queries would you use to find students who have either "Math" or "Science" in their subjects array?
+
+{ subjects: { $in: ["Math", "Science"] } }
+ 
+
+11) What is sharding in MongoDB?
+
+Dividing data into smaller, more manageable pieces
+ 
+
+ 
+12) Given a library collection with an array field genres, how would you filter documents to find books that belong to the "Science Fiction" genre?
+
+
+{ genres: { $in: ["Science Fiction"] } }
+ 
+
+ 
+13) Given a library collection, how would you use the $addFields stage to add a new field publishedYear with a value of 2020 to each document?
+
+{ $addFields: { publishedYear: 2020 } }
+ 
+
+ 
+14) Question: How do you use the spread operator to combine two arrays in JavaScript?
+
+const combined = [...array1, ...array2];
+ 
+15) What is the purpose of a callback function in Node.js?
+
+To handle asynchronous operations
+ 
+
+ 
+16) How would you filter a students collection to find records where the name field does not contain the letter "a"?
+
+{ name: { $not: { $regex: /a/ } } }
+  
+17) How can you limit the number of documents passing through an aggregation pipeline?
+
+
+Using the $limit stage
+ 
+
+18) Which aggregation stage would you use to create a new field totalBooks with the sum of books in a library collection?
+
+ 
+$addFields
+
+ 
+19) Question: How do you define a callback function in Node.js?
+
+function callback(err, result) {}
+ 
+
+ 
+ 20) In a weather collection, which aggregation stage would you use to calculate the total number of weather records per city?
+
+$group
+ 
+21) How do you call a function named myFunc with two arguments arg1 and arg2?
+
+myFunc(arg1, arg2);
+ 
+22) Which of the following uses the rest operator correctly in a function definition?
+
+function sum(...args) { return args.reduce((acc, curr) => acc + curr, 0); }
+ 
+23) How would you use the $limit stage to return only the top 5 documents in a books collection?
+
+[ { $limit: 5 } ]
+ 
+24) In an exams collection, how would you use the $project stage to include only the studentId and score fields in the output?
+
+{ $project: { studentId: 1, score: 1, _id: 0 } }
+ 
+25) In a pets collection, how would you filter documents to find records where the type is not "Dog"?
+
+{ type: { $ne: "Dog" } }
+ 
+
+ 
+26) Which of the following uses the reduce method to count the number of occurrences of each element in an array?
+
+array.reduce((acc, curr) => { acc[curr] = (acc[curr] || 0) + 1; return acc; }, {});
+ 
+27) How would you filter a vehicles collection to find records where the model starts with the letter "T"?
+
+{ model: { $regex: "^T" } }
+ 
+28) Which of the following scenarios correctly uses the spread operator to pass an array as function arguments?
+
+`myFunction(...array);`
+ 
+ 29) Which operator would you use to find pets in a pets collection that are either "Dog" or "Cat"?
+
+{ type: { $in: ["Dog", "Cat"] } }
+ 
+30) How do you use the reduce method to create an object from an array of key-value pairs?
+
+array.reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+ 
+31) How would you filter a library collection to find books that have more than 300 pages?
+
+{ pages: { $gt: 300 } }
+ 
+32) How do you handle errors in a callback function?
+
+if (err) { console.error(err); }
+ 
+
+ 
+33) Which of the following uses the reduce method to concatenate all strings in an array?
+
+array.reduce((acc, curr) => acc + curr, "");
+ 
+ 
+34) How do you destructure an array to extract the first and second elements?
+
+const [first, second] = array;
+ 
+35) How would you use the spread operator to copy an object in JavaScript?
+
+const copy = { ...obj };
+ 
+36) How do you create an arrow function in JavaScript?
+
+const myFunc = () => {};
+ 
+37) In a weather collection, which aggregation pipeline would correctly calculate the average temperature for each city?
+
+[ { $group: { _id: "$city", avgTemp: { $avg: "$temperature" } } } ]
+ 
+38) How do you define a function in JavaScript?
+
+function myFunc() {}
+ 
+
+ 
+39) Which aggregation stage would you use to rename a field in the output documents of a students collection?
+
+$set
+ 
+40) How do you filter documents in a weather collection to find records where the temperature is less than 20 degrees?
+{ temperature: { $lt: 20 } }
+
+ 
+ 41) How do you rename variables while destructuring an object?
+
+const { name: studentName, age: studentAge } = obj;
+ 
+ 42) How can you use the rest operator to collect all remaining arguments into an array?
+
+function myFunc(...args) { console.log(args); }
+
+ 
+43) In a weather collection, which aggregation stage would you use to sort documents by temperature in descending order?
+
+$sort
+ 
+
+ 
+44) How do you destructure an object to extract the name and age properties?
+
+const { name, age } = obj;
+
+ 
+45 How would you pass a default parameter value to a function?
+
+function myFunc(param = "default") {}
+ 
+46) How would you use the reduce method to find the maximum value in an array?
+
+array.reduce((acc, curr) => Math.max(acc, curr), -Infinity);
+ 
+
+ 
+47) Which operator would you use to find books in a library collection where the author is either "Alice" or "Bob"?
+
+{ author: { $in: ["Alice", "Bob"] } }
+ 
+
+48) How do you return a value from a function in JavaScript?
+
+return value;
+  
+49) How do you use the reduce method to sum all elements in an array?
+
+array.reduce((acc, curr) => acc + curr, 0);
+ 
+ 
+49) Which aggregation stage would you use to merge two collections based on a common field?
+
+$lookup
+ 
