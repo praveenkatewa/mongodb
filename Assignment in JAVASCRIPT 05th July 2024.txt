@@ -1,0 +1,262 @@
+1.  Create a user-defined callback function that sorts an array of numbers in ascending or descending order based on the callback provided. The master function should take an array and a callback function as arguments.  
+
+
+// Master function to sort an array based on a callback function
+function sortArray(array, callback) {
+    // Use the callback function to determine sorting order
+    return callback(array);
+}
+
+// Callback function to sort array in ascending order
+function ascendingSort(arr) {
+    return arr.slice().sort((a, b) => a - b);
+}
+
+// Callback function to sort array in descending order
+function descendingSort(arr) {
+    return arr.slice().sort((a, b) => b - a);
+}
+
+// Example usage:
+const numbers = [5, 2, 8, 1, 4];
+
+// Sort in ascending order
+console.log(sortArray(numbers, ascendingSort)); // Output: [1, 2, 4, 5, 8]
+
+// Sort in descending order
+console.log(sortArray(numbers, descendingSort)); // Output: [8, 5, 4, 2, 1]
+
+
+2.  Create an object named product with at least 5 keys (e.g., productId, productName, price, category, tags). One of the keys should have an array as its value. Then, create a function that accepts this object in destructured format, prints all the information, and calls another function that will pass the key array into another function. Additionally, call a function that will pass the object as a key into another function and print all the keys.
+
+// Define the product object
+const product = {
+    productId: 1,
+    productName: "Example Product",
+    price: 49.99,
+    category: "Electronics",
+    tags: ["new", "sale", "featured"]
+};
+
+// Function to print all information using object destructuring
+function printProductInfo({ productId, productName, price, category, tags }) {
+    console.log(`Product ID: ${productId}`);
+    console.log(`Product Name: ${productName}`);
+    console.log(`Price: ${price}`);
+    console.log(`Category: ${category}`);
+    console.log(`Tags: ${tags.join(', ')}`);
+    
+    // Call another function passing the key array
+    passKeyArray(tags);
+    
+    // Call another function passing the entire object and print all keys
+    printAllKeys(product);
+}
+
+// Function to pass the key array into another function
+function passKeyArray(array) {
+    console.log("\nInside passKeyArray function:");
+    console.log("Array:", array);
+}
+
+// Function to print all keys of an object
+function printAllKeys(obj) {
+    console.log("\nInside printAllKeys function:");
+    for (let key in obj) {
+        console.log(key);
+    }
+}
+
+// Call the main function with the product object destructured
+printProductInfo(product);
+
+
+3.Create an object named student with at least 5 keys (e.g., studentId, studentName, grade, subjects, hobbies). One of the keys should have an array as its value. Then, create a function that accepts this object in destructured format, prints all the information, and calls another function that will pass the key array into another function. Additionally, call a function that will pass the object as a key into another function and print all the keys.
+
+// Define the student object
+const student = {
+    studentId: 1,
+    studentName: "John Doe",
+    grade: "Senior",
+    subjects: ["Math", "Science", "History"],
+    hobbies: ["Reading", "Painting", "Sports"]
+};
+
+// Function to print all information using object destructuring
+function printStudentInfo({ studentId, studentName, grade, subjects, hobbies }) {
+    console.log(`Student ID: ${studentId}`);
+    console.log(`Student Name: ${studentName}`);
+    console.log(`Grade: ${grade}`);
+    console.log(`Subjects: ${subjects.join(', ')}`);
+    console.log(`Hobbies: ${hobbies.join(', ')}`);
+    
+    // Call another function passing the key array
+    passKeyArray(subjects);
+    
+    // Call another function passing the entire object and print all keys
+    printAllKeys(student);
+}
+
+// Function to pass the key array into another function
+function passKeyArray(array) {
+    console.log("\nInside passKeyArray function:");
+    console.log("Array:", array);
+}
+
+// Function to print all keys of an object
+function printAllKeys(obj) {
+    console.log("\nInside printAllKeys function:");
+    for (let key in obj) {
+        console.log(key);
+    }
+}
+
+// Call the main function with the student object destructured
+printStudentInfo(student);
+
+
+4.Create an object named customer with at least 5 keys (e.g., customerId, customerName, email, phoneNumbers, addresses). One of the keys should have an array as its value. Then, create a function that accepts this object in destructured format, prints all the information, and calls another function that will pass the key array into another function. Additionally, call a function that will pass the object as a key into another function and print all the keys.
+
+// Define the customer object
+const customer = {
+    customerId: 1,
+    customerName: "Alice Smith",
+    email: "alice@example.com",
+    phoneNumbers: ["123-456-7890", "456-789-0123"],
+    addresses: [
+        { street: "123 Main St", city: "Anytown", state: "CA" },
+        { street: "456 Elm St", city: "Sometown", state: "NY" }
+    ]
+};
+
+// Function to print all information using object destructuring
+function printCustomerInfo({ customerId, customerName, email, phoneNumbers, addresses }) {
+    console.log(`Customer ID: ${customerId}`);
+    console.log(`Customer Name: ${customerName}`);
+    console.log(`Email: ${email}`);
+    console.log(`Phone Numbers: ${phoneNumbers.join(', ')}`);
+    console.log("Addresses:");
+    addresses.forEach((address, index) => {
+        console.log(`Address ${index + 1}: ${address.street}, ${address.city}, ${address.state}`);
+    });
+    
+    // Call another function passing the key array
+    passKeyArray(phoneNumbers);
+    
+    // Call another function passing the entire object and print all keys
+    printAllKeys(customer);
+}
+
+// Function to pass the key array into another function
+function passKeyArray(array) {
+    console.log("\nInside passKeyArray function:");
+    console.log("Array:", array);
+}
+
+// Function to print all keys of an object
+function printAllKeys(obj) {
+    console.log("\nInside printAllKeys function:");
+    for (let key in obj) {
+        console.log(key);
+    }
+}
+
+// Call the main function with the customer object destructured
+printCustomerInfo(customer);
+
+5.Create an object named project with at least 5 keys (e.g., projectId, projectName, deadline, teamMembers, tasks). One of the keys should have an array as its value. Then, create a function that accepts this object in destructured format, prints all the information, and calls another function that will pass the key array into another function. Additionally, call a function that will pass the object as a key into another function and print all the keys.
+
+// Define the project object
+const project = {
+    projectId: 1,
+    projectName: "Website Redesign",
+    deadline: "2024-12-31",
+    teamMembers: ["Alice", "Bob", "Charlie"],
+    tasks: [
+        { taskId: 1, taskName: "Design mockups", status: "In progress" },
+        { taskId: 2, taskName: "Frontend development", status: "Pending" },
+        { taskId: 3, taskName: "Backend integration", status: "Not started" }
+    ]
+};
+
+// Function to print all information using object destructuring
+function printProjectInfo({ projectId, projectName, deadline, teamMembers, tasks }) {
+    console.log(`Project ID: ${projectId}`);
+    console.log(`Project Name: ${projectName}`);
+    console.log(`Deadline: ${deadline}`);
+    console.log(`Team Members: ${teamMembers.join(', ')}`);
+    console.log("Tasks:");
+    tasks.forEach((task, index) => {
+        console.log(`Task ${index + 1}: ${task.taskName}, Status: ${task.status}`);
+    });
+    
+    // Call another function passing the key array
+    passKeyArray(teamMembers);
+    
+    // Call another function passing the entire object and print all keys
+    printAllKeys(project);
+}
+
+// Function to pass the key array into another function
+function passKeyArray(array) {
+    console.log("\nInside passKeyArray function:");
+    console.log("Array:", array);
+}
+
+// Function to print all keys of an object
+function printAllKeys(obj) {
+    console.log("\nInside printAllKeys function:");
+    for (let key in obj) {
+        console.log(key);
+    }
+}
+
+// Call the main function with the project object destructured
+printProjectInfo(project);
+
+
+6.Create a function named addToArray that accepts an array and a new element to add. Each time the function is called, it should return a new array with the new element added at the end, without mutating the original array. Use the spread operator to achieve this.
+const initialArray = [1, 2, 3];
+const newArray1 = addToArray(initialArray, 4); // [1, 2, 3, 4]
+const newArray2 = addToArray(newArray1, 5); // [1, 2, 3, 4, 5]
+
+// Function to add an element to an array without mutating it
+function addToArray(array, newElement) {
+    return [...array, newElement];
+}
+
+// Example usage:
+const initialArray = [1, 2, 3];
+
+const newArray1 = addToArray(initialArray, 4);
+console.log(newArray1); // Output: [1, 2, 3, 4]
+
+const newArray2 = addToArray(newArray1, 5);
+console.log(newArray2); // Output: [1, 2, 3, 4, 5]
+
+
+7.Create a function named removeLastElement that accepts an array. Each time the function is called, it should return a new array with the last element removed, without mutating the original array. Use the spread operator and array methods to achieve this.
+const initialArray = [1, 2, 3, 4];
+const newArray1 = removeLastElement(initialArray); // [1, 2, 3]
+const newArray2 = removeLastElement(newArray1); // [1, 2]
+
+// Function to remove the last element from an array without mutating it
+function removeLastElement(array) {
+    // Check if the array is empty
+    if (array.length === 0) {
+        return [];
+    }
+
+    // Use slice to create a new array without the last element
+    return array.slice(0, -1);
+}
+
+// Example usage:
+const initialArray = [1, 2, 3, 4];
+
+const newArray1 = removeLastElement(initialArray);
+console.log(newArray1); // Output: [1, 2, 3]
+
+const newArray2 = removeLastElement(newArray1);
+console.log(newArray2); // Output: [1, 2]
+
