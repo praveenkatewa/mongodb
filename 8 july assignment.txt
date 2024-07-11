@@ -1,0 +1,201 @@
+1) How many documents are there in the collection?
+
+    console.log(user.length);
+=========================================================================================
+
+2)Retrieve all documents where the role is "admin".
+
+ const ad=user.filter(user=>user.role==="admin");
+   console.log(ad);
+
+========================================================================================
+3)Find all documents where the role is "customer" and the username contains "Karamchandani".
+
+  const ad=user.filter(user=>user.role==="customer" && user.username.includes("Karamchandani"));
+   console.log(ad);
+==========================================================================================
+4) Retrieve the document with the username "Sumanth Rao".
+
+    const ad=user.filter(user=> user.username==("Sumanth Rao"));
+   console.log(ad);
+=======================================================================================
+
+5) Find all documents where the user's first name starts with "R".
+
+const ad = user.filter(user=>user.username.startsWith("R"));
+ console.log(ad)
+===========================================================================================
+6) Retrieve all documents where the user has the skill "Python".
+
+    const ad = user.filter(user=>user.skills.includes("Python") );
+ console.log(ad);
+=========================================================================================
+7) Find all documents where the user has the skill "Java" and "Python".
+
+const ad= user.filter(user=>user.skills.includes("Python") && user.skills.includes("Java") );
+ console.log(ad);
+=========================================================================================
+8) Retrieve all documents where the user's first name is "Aryan" or the last name is "Gupta".
+
+  const ad = user.filter(user=> user.firstName=="Aryan" || user.lastName=="Gupta");
+console.log(ad)
+--------------------------------------------------------------------
+9 ) Find all documents where the user has the skill "Java" but not "Python".
+
+  const ad= user.filter(user=>user.skills.includes("Java") && !user.skills.includes("Python") );
+ console.log(ad);
+ =============================================================================
+10) Retrieve all documents where the user's last name is "Sharma" and the role is "customer".
+
+const ad= user.filter(user=>user.lastName=="Sharma" && user.role=="customer");
+ console.log(ad);
+==================================================================================
+11) Find all documents where the user has exactly three skills.
+
+ const ad = user.filter(user=>user.skills.length==3);
+ console.log(ad);
+====================================================================================
+12) Retrieve all documents where the user's first name starts with "S" and the role is "admin".
+
+ const ad = user.filter(user=>user.firstName.startsWith("S")&& user.role=="admin");
+ console.log(ad);
+ ===================================================================================
+13) Find all documents where the user has the skill "Java" and the role is not "admin".
+
+const ad = user.filter(user=>user.skills.includes("Java") && user.role !=="admin");
+ console.log(ad);
+ ===========================================================================
+14) Retrieve all documents where the user's role is not specified.
+
+const ad = user.filter(user=>user.role=="undefined" ||user.role =="Null");
+ console.log(ad);
+=====================================================================================
+15) Find all documents where the user has at least four skills.
+
+const ad = user.filter((user)=>user.skills.length>=4);
+  console.log(ad);
+ ===================================================================================
+
+16 ) Retrieve all documents where the user's role is "customer" and the user has no specified skills.
+
+const ad = user.filter((user)=>user.role=="customer"&& user.skills.length==0);
+ console.log(ad);
+====================================================================================
+17) Find all documents where the user's email contains "regexsoftware.com".
+
+const ad = user.filter((user)=>user.useremail.includes("regexsoftware.com"));
+ console.log(ad);
+====================================================================================
+18) Retrieve all documents where the user's email does not contain "gmail.com".
+
+const ad = user.filter((user)=>!user.useremail.includes("gmail.com"));
+ console.log(ad);
+ ====================================================================================
+19) Find all documents where the user's last name is not "Singh".
+
+ const ad = user.filter((user)=>user.lastName!="Singh");
+ console.log(ad);
+====================================================================================
+20 ) Retrieve all documents where the user's role is "admin" and the user has the skill "Java".
+
+const ad = user.filter((user)=>user.role=="admin" && user.skills.includes("Java") );
+ console.log(ad);
+======================================================================================
+21) Find all documents where the user's first name is "Ananya" and the user's role is "customer".
+
+const ad = user.filter((user)=>user.firstName=="Ananya" && user.role=="customer");
+ console.log(ad);
+==================================================================================
+22)Retrieve all documents where the user's role is "admin" and the user has at least one skill.
+
+ const ad = user.filter((user)=>user.skills.length>=1 && user.role=="customer");
+ console.log(ad);
+====================================================================================
+23) Find all documents where the user's role is "admin" and the user's first name starts with "R".
+const ad = user.filter((user)=>user.firstName.startsWith("R") && user.role=="admin");
+ console.log(ad);
+===================================================================================
+24) Retrieve all documents where the user's role is "customer" and the user's last name is "Patel".
+
+ const ad = user.filter((user)=>user.lastName=="Patel" && user.role=="customer");
+ console.log(ad);
+ ===================================================================================
+25) Find all documents where the user's role is "admin" and the user has the skill "Python".
+
+const ad= user.filter((user)=>user.skills.includes("Python") && user.role=="admin");
+ console.log(ad);
+ ============================================================================
+26) Retrieve all documents where the user's role is "customer" and the user's last name is not "Gupta".
+
+const ad = user.filter((user)=>user.lastName1!="Gupta" && user.role=="customer");
+ console.log(ad);
+=====================================================================================
+27)Find all documents where the user's role is "admin" and the user's email ends with "@regexsoftware.com".
+
+const ad= user.filter((user)=>user.useremail.endsWith("@regexsoftware.com") && user.role=="admin");
+ console.log(ad);
+======================================================================================
+28) Retrieve all documents where the user's role is "customer" and the user has the skill "React".
+
+const ad = user.filter((user)=>user.skills.includes("React") && user.role=="customer");
+ console.log(ad);
+-==================================================================================
+29) Find all documents where the user's role is "customer" and the user has the skill "SQL".
+
+const ad = user.filter((user)=>user.skills.includes("SQL") && user.role=="customer");
+ console.log(ad);
+=====================================================================================
+30)Retrieve all documents where the user's role is "admin" and the user has at least three skills.
+
+ const ad = user.filter((user)=>user.skills.length>=3 && user.role=="admin");
+ console.log(ad);
+=====================================================================================
+31_ Find all documents where the user's role is "customer" and the user has the skills "Java" and "C++".
+
+const ad = user.filter((user)=>user.skills.includes("Java","C++") && user.role=="customer");
+ console.log(ad);
+=====================================================================================
+32) Retrieve all documents where the user's role is "admin" and the user's email does not contain "gmail.com".
+
+const ad = user.filter((user)=>user.useremail.includes("gmail.com") && user.role=="admin");
+ console.log(ad);
+========================================================================================
+33) Find all documents where the user's role is "customer" and the user's last name starts with "M".
+
+ const ad = user.filter((user)=>user.lastName.startsWith("M") && user.role=="customer");
+ console.log(ad);
+======================================================================================
+34) Retrieve all documents where the user's role is "admin" and the user's first name is not "Rahul".
+
+const ad = user.filter((user)=>user.firstName!="Rahul" && user.role=="admin");
+ console.log(ad);
+====================================================================================
+35) Find all documents where the user's role is "customer" and the user's email does not contain "gmail.com".
+
+const ad = user.filter((user)=>!user.useremail.includes("gmail.com") && user.role=="customer");
+ console.log(ad);
+====================================================================================
+36) Retrieve all documents where the user's role is "admin" and the user has the skill "Java" but not "JavaScript".
+
+ const ad = user.filter((user)=>user.skills.includes("Java")&& !user.skills.includes("JavaScript") && user.role=="admin");
+ console.log(ad);
+===================================================================================
+37) Find all documents where the user's role is "customer" and the user's first name is not "Ananya".
+
+const ad = user.filter((user)=>user.firstName!="Ananya" && user.role=="customer");
+ console.log(ad);
+========================================================================================
+38) Retrieve all documents where the user's role is "admin" and the user's email contains "regexsoftware.com".
+
+const ad = user.filter((user)=>user.useremail.includes("regexsoftware.com") && user.role=="admin");
+ console.log(ad);
+======================================================================================
+39) Find all documents where the user's role is "customer" and the user has the skill "HTML" but not "CSS". '
+
+const ad= user.filter((user)=>user.skills.includes("HTML")&& !user.skills.includes("CSS") && user.role=="customer");
+ console.log(ad);
+=====================================================================================
+40) Retrieve all documents where the user's role is "admin" and the user has the skill "Java" and "JavaScript".
+
+const ad= user.filter((user)=>user.skills.includes("Java","JavaScript") && user.role=="admin");
+ console.log(ad);
